@@ -39,5 +39,13 @@ def getScrapedData():
             statesData.append(data)
     return jsonify(statesData)
 
+@app.route('/vaccinated')
+def getVaccinatedData():
+    driver.get(URL)
+    totalVaccinated = driver.find_element(By.CSS_SELECTOR, "span.coviddata")
+    vaccinated = {}
+    vaccinated['totalVaccinated'] = totalVaccinated.text
+    return jsonify(vaccinated)
+
 if __name__ == '__main__':
     app.run(debug= False)
